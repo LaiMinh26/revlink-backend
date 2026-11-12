@@ -5,6 +5,9 @@ const cors = require('cors');
 const bcrypt = require('bcrypt');
 require('dotenv').config();
 
+// 1. KHỞI TẠO APP TRƯỚC TIÊN
+const app = express();
+
 app.use(cors({
   origin: [
     'http://localhost:5173', 
