@@ -5,8 +5,15 @@ const cors = require('cors');
 const bcrypt = require('bcrypt');
 require('dotenv').config();
 
-const app = express();
-app.use(cors({ origin: ['http://localhost:5173', 'http://localhost:3000'] })); // cổng Vite / CRA
+app.use(cors({
+  origin: [
+    'http://localhost:5173', 
+    'http://localhost:3000', 
+    'https://influencer-platform-xi.vercel.app' // Thay bằng link Vercel hiện tại của bạn
+  ],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
+})); // cổng Vite / CRA
 app.use(express.json());
  
 const db = mysql.createPool({
