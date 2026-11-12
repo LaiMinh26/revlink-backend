@@ -440,5 +440,15 @@ app.post('/api/sample-products', async (req, res) => {
   }
 });
 
+app.get('/api/health', async (req, res) => {
+  try {
+    const [[r]] = await db.query('SELECT DATABASE() AS db, VERSION() AS version');
+    const [tables] = await db.query('SHOW TABLES');
+    res.json({ ok: true, db: r.db, version: r.version, tables: tables.map(t => Object.values(t)[0]) });
+  } catch (err) {
+    res.status(500).json({ ok: false, code: err.code, message: err.message });
+  }
+});
+
 app.listen(8080, () => console.log('API REVLINK chạy ở http://localhost:8080'));
  
